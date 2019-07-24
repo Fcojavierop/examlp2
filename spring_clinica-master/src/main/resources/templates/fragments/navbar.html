@@ -1,0 +1,40 @@
+<th:block th:fragment="navbar">
+    <div>
+         <nav class="navbar navbar-light navbar-expand-md navigation-clean-button" style="color:rgb(255,0,61);">
+             
+            <div class="container"><a class="navbar-brand">Clínica Spring</a> <div class="collapse navbar-collapse"
+                    id="navcol-1">
+                    <ul class="nav navbar-nav mr-auto">
+                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Pacientes</a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" th:href="@{/pacientes/nuevo}">Ingresar paciente</a><a class="dropdown-item" role="presentation" th:href="@{/pacientes/ver}">Ver pacientes</a></div>    
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Recetas</a>
+                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" th:href="@{/recetas/emitidas}">Recetas emitidas</a></div>
+                        </li>
+                    </ul>
+                    
+                    <th:block th:if="${session.medicoLogueado==null}">
+                        <li class="nav-item">
+                            <a class="btn btn-dark active action-button" role="button" href="/login">Iniciar sesión</a>
+                        </li>
+                    </th:block>
+                    
+                    <ul class="nav navbar-nav">
+                        <th:block th:unless="${session.medicoLogueado==null}">
+                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" th:text="'Médico: '+${session.medicoLogueado.getRut()}"> </a>
+                            <div class="dropdown-menu" role="menu">
+                                <form action="logout" method="post">
+                                    <input class="dropdown-item" type="submit" value="Terminar sesión">
+                                </form>
+                            </div>
+                        </li>
+                        </th:block>
+                    </ul>
+                  
+                    
+                </div>
+            </div>
+        </nav>
+    </div>
+    
+</th:block>
